@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мое портфолио</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="/" class="logo">🎨 Мое Портфолио</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Привет, я <span class="highlight">Валерия</span></h1>
+            <p>Начинающий разработчик</p>
+        </div>
+    </header>
+
+    <section class="projects">
+        <div class="container">
+            <h2>Мои проекты</h2>
+            <div class="projects-grid">
+                {% for project in projects %}
+                <div class="project-card" data-project-id="{{ project.id }}">
+                    <div class="project-image">
+                        {% if project.gallery and project.gallery|length > 1 %}
+                            <div class="gallery-container">
+                                <div class="gallery-slider">
+                                    {% for img in project.gallery %}
+                                    <img src="{{ img }}"
+                                         alt="{{ project.title }} - фото {{ loop.index }}"
+                                         class="gallery-slide {% if loop.first %}active{% endif %}"
+                                         data-index="{{ loop.index0 }}">
+                                    {% endfor %}
+                                </div>
+
+                                <!-- Индикаторы -->
+                                <div class="gallery-indicators">
+                                    {% for img in project.gallery %}
+                                    <span class="gallery-indicator {% if loop.first %}active{% endif %}"
+                                          data-index="{{ loop.index0 }}"></span>
+                                    {% endfor %}
+                                </div>
+
+                                <!-- Счетчик -->
+                                <div class="photo-counter">
+                                    <i class="fas fa-images"></i> {{ project.gallery|length }}
+                                </div>
+
+                                <!-- Кнопки -->
+                                <button class="gallery-btn gallery-prev">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="gallery-btn gallery-next">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        {% elif project.image %}
+                            <img src="{{ project.image }}" alt="{{ project.title }}">
+                        {% else %}
+                            <div class="no-image">📁</div>
+                        {% endif %}
+                    </div>
+                    <div class="project-info">
+                        <h3>{{ project.title }}</h3>
+                        <p>{{ project.description }}</p>
+                        <div class="tags">
+                            {% for tag in project.tags %}
+                            <span class="tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                        <a href="{{ project.github }}" target="_blank" class="github-btn">
+                            📁 GitHub
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Связь: valeria.pershukova@yandex.ru</p>
+        </div>
+    </footer>
+
+    <script>
+        // Плавная галерея с fade-эффектом
+        document.addEventListener('DOMContentLoaded', function() {
+            const projectCards = document.querySelectorAll('.project-card');
+
+            projectCards.forEach(card => {
+                const slides = card.querySelectorAll('.gallery-slide');
+                const indicators = card.querySelectorAll('.gallery-indicator');
+                const prevBtn = card.querySelector('.gallery-prev');
+                const nextBtn = card.querySelector('.gallery-next');
+                let currentIndex = 0;
+                let intervalId = null;
+
+                // Если нет галереи или только одно фото - выходим
+                if (slides.length <= 1) {
+                    return;
+                }
+
+                // Функция плавного перехода к слайду
+                function goToSlide(index) {
+                    // Скрываем текущий слайд
+                    slides[currentIndex].classList.remove('active');
+                    if (indicators.length > 0) {
+                        indicators[currentIndex].classList.remove('active');
+                    }
+
+                    // Показываем новый слайд
+                    slides[index].classList.add('active');
+                    if (indicators.length > 0) {
+                        indicators[index].classList.add('active');
+                    }
+
+                    currentIndex = index;
+                }
+
+                // Следующий слайд
+                function nextSlide() {
+                    let nextIndex = currentIndex + 1;
+                    if (nextIndex >= slides.length) {
+                        nextIndex = 0;
+                    }
+                    goToSlide(nextIndex);
+                }
+
+                // Предыдущий слайд
+                function prevSlide() {
+                    let prevIndex = currentIndex - 1;
+                    if (prevIndex < 0) {
+                        prevIndex = slides.length - 1;
+                    }
+                    goToSlide(prevIndex);
+                }
+
+                // Автоматическое перелистывание при наведении
+                card.addEventListener('mouseenter', () => {
+                    intervalId = setInterval(nextSlide, 3000); // Каждые 3 секунды
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    if (intervalId) {
+                        clearInterval(intervalId);
+                        intervalId = null;
+                    }
+                });
+
+                // Клик по кнопкам
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        nextSlide();
+                    });
+                }
+
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        prevSlide();
+                    });
+                }
+
+                // Клик по индикаторам
+                indicators.forEach((indicator, index) => {
+                    indicator.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        goToSlide(index);
+                    });
+                });
+
+                // Инициализация - показываем первый слайд
+                goToSlide(0);
+            });
+        });
+    </script>
+</body>
+</html>
