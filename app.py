@@ -3,7 +3,6 @@ import os
 
 app = Flask(__name__)
 
-# Создаем папку для загрузок если её нет
 os.makedirs('uploads', exist_ok=True)
 
 # Данные ваших проектов
