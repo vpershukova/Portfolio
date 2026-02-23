@@ -29,15 +29,15 @@ Portfolio предоставляет следующие возможности:
 ### Структура:
 ```bash
 Portfolio/
-├── app.py # Основные маршруты и логика
-├── main.py # Точка входа
-├── requirements.txt # Зависимости
-├── static/ # Статические файлы (CSS, JS, изображения)
-│ ├── css/
-│ ├── js/
-│ └── images/
-└── templates/ # HTML-шаблоны
-└── index.html
+├── app.py                 # Основные маршруты и логика
+├── main.py                # Точка входа
+├── requirements.txt       # Зависимости
+├── static/                # Статические файлы (CSS, JS, изображения)
+│   ├── css/
+│   ├── js/
+│   └── images/
+└── templates/             # HTML-шаблоны
+    └── index.html
 ```
 
 
@@ -60,4 +60,16 @@ pip install -r requirements.txt
 
 # Запуск приложения
 python main.py
+```
+
+## Технологии
+- Backend: Python 3.x, Flask
+ - Frontend: HTML5, CSS3, JavaScript
+- Дополнительно: Font Awesome, адаптивная верстка
+
+## Автор
+Валерия Першукова
+GitHub: @vpershukova
+
+
 
