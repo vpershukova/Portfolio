@@ -44,20 +44,3 @@ pip install -r requirements.txt
 
 # Запуск приложения
 python main.py
-
----
-
-## Установка
-
-### Вручную:
-Portfolio/
-├── app.py # Основные маршруты и логика
-├── main.py # Точка входа
-├── requirements.txt # Зависимости
-├── static/ # Статические файлы (CSS, JS, изображения)
-│ ├── css/
-│ ├── js/
-│ └── images/
-└── templates/ # HTML-шаблоны
-└── index.html
-
