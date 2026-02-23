@@ -24,6 +24,21 @@ Portfolio предоставляет следующие возможности:
 - **Чистая структура кода** — легко понять и модифицировать
 
 ---
+---
+##  Структура проекта
+
+
+Portfolio/
+├── app.py # Основные маршруты и логика
+├── main.py # Точка входа
+├── requirements.txt # Зависимости
+├── static/ # Статические файлы (CSS, JS, изображения)
+│ ├── css/
+│ ├── js/
+│ └── images/
+└── templates/ # HTML-шаблоны
+└── index.html
+
 
 ## Установка
 
@@ -46,19 +61,7 @@ pip install -r requirements.txt
 python main.py
 
 
----
-##  Структура проекта
 
 
-Portfolio/
-├── app.py # Основные маршруты и логика
-├── main.py # Точка входа
-├── requirements.txt # Зависимости
-├── static/ # Статические файлы (CSS, JS, изображения)
-│ ├── css/
-│ ├── js/
-│ └── images/
-└── templates/ # HTML-шаблоны
-└── index.html
 
 
