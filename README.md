@@ -47,8 +47,9 @@ python main.py
 
 
 ---
+##  Структура проекта
 
-## Структура проекта
+
 Portfolio/
 ├── app.py # Основные маршруты и логика
 ├── main.py # Точка входа
@@ -59,4 +60,5 @@ Portfolio/
 │ └── images/
 └── templates/ # HTML-шаблоны
 └── index.html
+
 
