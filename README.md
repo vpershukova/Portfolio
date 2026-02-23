@@ -27,6 +27,7 @@ Portfolio предоставляет следующие возможности:
 ---
 ##  Структура проекта
 ### Структура:
+```bash
 Portfolio/
 ├── app.py # Основные маршруты и логика
 ├── main.py # Точка входа
@@ -37,6 +38,7 @@ Portfolio/
 │ └── images/
 └── templates/ # HTML-шаблоны
 └── index.html
+```
 
 
 ## Установка
@@ -58,3 +60,4 @@ pip install -r requirements.txt
 
 # Запуск приложения
 python main.py
+
